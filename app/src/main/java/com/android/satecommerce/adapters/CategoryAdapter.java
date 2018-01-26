@@ -47,6 +47,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryHolder> {
             public void onClick(View view) {
                 Intent productIntent = new Intent(mContext, ProductsActivity.class);
                 productIntent.putExtra("category_id",current.getId());
+                productIntent.putExtra("category_name",current.getName());
                 mContext.startActivity(productIntent);
             }
         });

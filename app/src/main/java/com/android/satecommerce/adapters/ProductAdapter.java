@@ -46,18 +46,23 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductsHolder> {
         final Product current = data.get(position);
         holder.text_view_product_name.setText("" + current.getName());
         holder.text_view_product_color.setText(DataService.getBoldFormatedText("Color : ", current.getVariants().get(0).getColor()));
+
+        if (current.getVariants().get(0).getSize() == null) {
+            holder.text_view_product_size.setVisibility(View.GONE);
+        }
+
         holder.text_view_product_size.setText(DataService.getBoldFormatedText("Size : ", String.valueOf(current.getVariants().get(0).getSize())));
         holder.text_view_product_price.setText(DataService.getBoldFormatedText("Price : ₹ ", String.valueOf(current.getVariants().get(0).getPrice())));
         holder.text_view_product_variant.setText(DataService.getBoldFormatedText("Variants : ", String.valueOf(current.getVariants().size())));
 
 
-        holder.linear_layout_product.setOnClickListener(new View.OnClickListener() {
+        /*holder.linear_layout_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent productIntent = new Intent(mContext, ProductsActivity.class);
                 mContext.startActivity(productIntent);
             }
-        });
+        });*/
 
     }
 

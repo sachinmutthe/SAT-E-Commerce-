@@ -39,7 +39,7 @@ public class ProductsActivity extends AppCompatActivity {
         setContentView(R.layout.products_activity);
         ButterKnife.bind(this);
 
-        text_view_toolbar_title.setText("Category Name");
+        text_view_toolbar_title.setText(getIntent().getStringExtra("category_name"));
 
         initToolBar();
         categoryId = getIntent().getIntExtra("category_id", 1);
