@@ -1,12 +1,14 @@
 package com.android.satecommerce.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.satecommerce.R;
+import com.android.satecommerce.activities.ProductsActivity;
 import com.android.satecommerce.beans.Category;
 import com.android.satecommerce.holders.CategoryHolder;
 
@@ -40,6 +42,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryHolder> {
     public void onBindViewHolder(CategoryHolder holder, int position) {
         final Category current = data.get(position);
         holder.text_view_category_name.setText("" + current.getName());
+        holder.text_view_category_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent productIntent = new Intent(mContext, ProductsActivity.class);
+                productIntent.putExtra("category_id",current.getId());
+                mContext.startActivity(productIntent);
+            }
+        });
+
     }
 
     @Override

@@ -1,5 +1,10 @@
 package com.android.satecommerce.model;
 
+import android.graphics.Typeface;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
+
 import com.android.satecommerce.beans.Category;
 import com.android.satecommerce.beans.Product;
 import com.android.satecommerce.beans.Product_;
@@ -25,12 +30,12 @@ public class DataService {
         DataService.responseServerData = responseServerData;
     }
 
-    public static List<Product> getProductByCategoryId(int categoty) {
+    public static List<Product> getProductByCategoryId(int categoryId) {
         List<Product> productList = new ArrayList<>();
 
         for (Category category : responseServerData.getCategories()) {
-            if (category.getId() == categoty) {
-                productList = category.getProducts();
+            if (category.getId() == categoryId) {
+                productList.addAll(category.getProducts());
             }
         }
         return productList;
@@ -65,5 +70,11 @@ public class DataService {
         List<Product_> productList = new ArrayList<>();
         productList.addAll(responseServerData.getRankings().get(2).getProducts());
         return productList;
+    }
+
+    public static SpannableString getBoldFormatedText(String boldText, String normalText) {
+        SpannableString str = new SpannableString(boldText + normalText);
+        str.setSpan(new StyleSpan(Typeface.BOLD), 0, boldText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return str;
     }
 }
