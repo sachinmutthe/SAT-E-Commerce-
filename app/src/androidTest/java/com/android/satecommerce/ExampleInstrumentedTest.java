@@ -1,4 +1,4 @@
-package com.android.sate_commerce;
+package com.android.satecommerce;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

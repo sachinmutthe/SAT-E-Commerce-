@@ -1,4 +1,4 @@
-package com.android.sate_commerce;
+package com.android.satecommerce;
 
 import org.junit.Test;
 
