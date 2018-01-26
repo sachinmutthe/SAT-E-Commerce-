@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@color/background_light"
     android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
@@ -23,10 +24,14 @@
 
     </android.support.v7.widget.Toolbar>
 
+
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_my_business"
+        android:id="@+id/recycler_view_categories"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar" />
+        android:layout_below="@+id/toolbar"
+        android:paddingTop="4dp"
+        android:layout_marginLeft="4dp"
+        android:scrollbars="vertical" />
 
 </RelativeLayout>

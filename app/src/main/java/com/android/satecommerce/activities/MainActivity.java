@@ -4,11 +4,15 @@ import android.app.ProgressDialog;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TextView;
 
 import com.android.satecommerce.R;
+import com.android.satecommerce.adapters.CategoryAdapter;
 import com.android.satecommerce.beans.Category;
 import com.android.satecommerce.beans.Product;
 import com.android.satecommerce.beans.ResponseServerData;
@@ -31,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
     ProgressDialog pDialog;
     static OkHttpClient client = new OkHttpClient();
     Gson gson = new Gson();
+    CategoryAdapter categoryAdapter;
+    private LinearLayoutManager mLayoutManager;
+    @Bind(R.id.recycler_view_categories)
+    RecyclerView recycler_view_categories;
 
 
     @Override
@@ -62,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
             DataService.setResponseServerData(responseServerData);
+
+            categoryAdapter = new CategoryAdapter(MainActivity.this, DataService.getResponseServerData().getCategories());
+            mLayoutManager = new GridLayoutManager(MainActivity.this, 3);
+            recycler_view_categories.setLayoutManager(mLayoutManager);
+            recycler_view_categories.setAdapter(categoryAdapter);
         } catch (Exception e) {
             e.printStackTrace();
         }
