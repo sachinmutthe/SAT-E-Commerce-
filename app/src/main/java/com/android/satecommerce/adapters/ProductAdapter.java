@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.satecommerce.R;
+import com.android.satecommerce.activities.ProductInfoActivity;
 import com.android.satecommerce.activities.ProductsActivity;
 import com.android.satecommerce.beans.Category;
 import com.android.satecommerce.beans.Product;
@@ -56,13 +57,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductsHolder> {
         holder.text_view_product_variant.setText(DataService.getBoldFormatedText("Variants : ", String.valueOf(current.getVariants().size())));
 
 
-        /*holder.linear_layout_product.setOnClickListener(new View.OnClickListener() {
+        holder.linear_layout_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent productIntent = new Intent(mContext, ProductsActivity.class);
+                Intent productIntent = new Intent(mContext, ProductInfoActivity.class);
+                productIntent.putExtra("product_id", current.getId());
+                productIntent.putExtra("product_name", current.getName());
                 mContext.startActivity(productIntent);
             }
-        });*/
+        });
 
     }
 
