@@ -45,6 +45,8 @@ public class DataService {
         Product product = null;
 
         for (Category category : responseServerData.getCategories()) {
+            if (category.getId() == 1001 || category.getId() == 1002 || category.getId() == 1003)
+                continue;
             for (Product product1 : category.getProducts()) {
                 if (product1.getId() == product_id)
                     return product1;

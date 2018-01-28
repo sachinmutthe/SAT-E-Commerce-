@@ -19,6 +19,8 @@ import com.android.satecommerce.beans.ResponseServerData;
 import com.android.satecommerce.model.DataService;
 import com.google.gson.Gson;
 
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import okhttp3.OkHttpClient;
@@ -71,7 +73,24 @@ public class MainActivity extends AppCompatActivity {
 
             DataService.setResponseServerData(responseServerData);
 
-            categoryAdapter = new CategoryAdapter(MainActivity.this, DataService.getResponseServerData().getCategories());
+            List<Category> categoryList = DataService.getResponseServerData().getCategories();
+
+            Category temp = new Category();
+            temp.setId(1001);
+            temp.setName("Most Viewed Products");
+            categoryList.add(0, temp);
+
+            temp = new Category();
+            temp.setId(1002);
+            temp.setName("Most Ordered Products");
+            categoryList.add(0, temp);
+
+            temp = new Category();
+            temp.setId(1003);
+            temp.setName("Most Shared Products");
+            categoryList.add(0, temp);
+
+            categoryAdapter = new CategoryAdapter(MainActivity.this, categoryList);
             mLayoutManager = new GridLayoutManager(MainActivity.this, 3);
             recycler_view_categories.setLayoutManager(mLayoutManager);
             recycler_view_categories.setAdapter(categoryAdapter);

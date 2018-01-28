@@ -10,8 +10,11 @@ import android.widget.TextView;
 
 import com.android.satecommerce.R;
 import com.android.satecommerce.adapters.ProductAdapter;
+import com.android.satecommerce.beans.Product;
+import com.android.satecommerce.beans.Product_;
 import com.android.satecommerce.model.DataService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -32,6 +35,7 @@ public class ProductsActivity extends AppCompatActivity {
     RecyclerView recycler_view_products;
     ProductAdapter productAdapter;
     int categoryId;
+    List<Product> productList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +48,26 @@ public class ProductsActivity extends AppCompatActivity {
         initToolBar();
         categoryId = getIntent().getIntExtra("category_id", 1);
 
-        productAdapter = new ProductAdapter(ProductsActivity.this, DataService.getProductByCategoryId(categoryId));
+        if (categoryId == 1001) {
+            for (Product_ product_ : DataService.getMostViewedProducts()) {
+                productList.add(DataService.getProductByProductId(product_.getId()));
+            }
+        } else if (categoryId == 1002) {
+            for (Product_ product_ : DataService.getMostOrderedProducts()) {
+                productList.add(DataService.getProductByProductId(product_.getId()));
+            }
+
+        } else if (categoryId == 1003) {
+            for (Product_ product_ : DataService.getMostSharedProducts()) {
+                productList.add(DataService.getProductByProductId(product_.getId()));
+            }
+
+        } else {
+            productList = DataService.getProductByCategoryId(categoryId);
+        }
+
+
+        productAdapter = new ProductAdapter(ProductsActivity.this, productList);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(ProductsActivity.this, 2);
         recycler_view_products.setLayoutManager(mLayoutManager);
         recycler_view_products.setAdapter(productAdapter);
